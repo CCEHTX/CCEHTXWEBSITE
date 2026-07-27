@@ -1,1 +1,653 @@
- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cupcake Evolution | Elevate Your Taste Buds</title>
+<link href="https://fonts.googleapis.com/css2?family=Niconne&family=Raleway:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root { --pink-dark:#EA558E; --pink-light:#FF7A8C; --black:#0a0a0a; --cream:#FFF5F7; --white:#ffffff; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--black);color:var(--white);font-family:'Raleway',sans-serif;overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:rgba(10,10,10,0.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(234,85,142,0.2);}
+  .nav-logo{font-family:'Niconne',cursive;font-size:2rem;color:var(--pink-dark);text-decoration:none;}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--cream);text-decoration:none;font-size:0.78rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;transition:color .3s;}
+  .nav-links a:hover{color:var(--pink-dark);}
+  .nav-cta{background:var(--pink-dark)!important;color:var(--white)!important;padding:.6rem 1.4rem;border-radius:30px;}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:0 2rem;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(234,85,142,.18) 0%,transparent 70%),radial-gradient(ellipse 50% 80% at 20% 80%,rgba(255,122,140,.12) 0%,transparent 60%),var(--black);}
+  .hero-bg::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23EA558E' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E");}
+  .hero-content{position:relative;z-index:2;text-align:center;max-width:820px;animation:fadeUp 1s ease both;}
+  .hero-eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--pink-dark);margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:.8rem;}
+  .hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:40px;height:1px;background:var(--pink-dark);}
+  h1{font-family:'Niconne',cursive;font-size:clamp(4rem,11vw,9rem);line-height:.95;color:var(--white);margin-bottom:.3em;text-shadow:0 0 80px rgba(234,85,142,.3);}
+  h1 span{color:var(--pink-dark);display:block;}
+  .hero-sub{font-size:clamp(.95rem,2vw,1.2rem);font-weight:400;color:rgba(255,245,247,.75);letter-spacing:.05em;margin-bottom:2.8rem;line-height:1.6;}
+  .hero-sub strong{color:var(--pink-light);font-weight:700;}
+  .btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{background:linear-gradient(135deg,var(--pink-dark),var(--pink-light));color:var(--white);padding:1rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:800;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;transition:transform .25s,box-shadow .25s;box-shadow:0 8px 30px rgba(234,85,142,.4);display:inline-block;border:none;cursor:pointer;font-family:'Raleway',sans-serif;}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(234,85,142,.55);}
+  .btn-outline{background:transparent;color:var(--cream);padding:1rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid rgba(255,245,247,.3);transition:border-color .25s,color .25s;display:inline-block;}
+  .btn-outline:hover{border-color:var(--pink-dark);color:var(--pink-dark);}
+  .scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,245,247,.3);animation:pulse 2s ease-in-out infinite;}
+  .scroll-hint::after{content:'';display:block;width:1px;height:40px;background:linear-gradient(to bottom,var(--pink-dark),transparent);}
+
+  /* MARQUEE */
+  .marquee-strip{background:var(--pink-dark);padding:.85rem 0;overflow:hidden;white-space:nowrap;}
+  .marquee-track{display:inline-flex;animation:marquee 22s linear infinite;gap:3rem;}
+  .marquee-track span{font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--white);flex-shrink:0;}
+  .marquee-track span.dot{color:rgba(255,255,255,.5);}
+
+  /* SECTIONS */
+  section{padding:7rem 2rem;}
+  .container{max-width:1100px;margin:0 auto;}
+  .section-label{font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--pink-dark);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
+  .section-label::after{content:'';display:block;width:30px;height:1px;background:var(--pink-dark);}
+  h2{font-family:'Niconne',cursive;font-size:clamp(2.8rem,6vw,5rem);line-height:1.05;color:var(--white);margin-bottom:1.2rem;}
+  h2 .accent{color:var(--pink-dark);}
+
+  /* ABOUT */
+  .about{background:var(--cream);color:var(--black);}
+  .about-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+  .about h2{color:var(--black);}
+  .about-text p{font-size:1.05rem;line-height:1.85;color:rgba(10,10,10,.75);margin-bottom:1.2rem;}
+  .about-text p strong{color:var(--pink-dark);font-weight:700;}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;}
+  .stat-box{border-left:3px solid var(--pink-dark);padding-left:1.2rem;}
+  .stat-box .num{font-family:'Niconne',cursive;font-size:2.8rem;color:var(--pink-dark);line-height:1;}
+  .stat-box .label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(10,10,10,.5);margin-top:.2rem;}
+  .about-visual{position:relative;}
+  .about-visual-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:40% 60% 60% 40%/50% 50% 60% 40%;}
+  .about-badge{position:absolute;bottom:10%;right:-10%;width:110px;height:110px;background:var(--black);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid var(--pink-dark);text-align:center;padding:.5rem;}
+  .about-badge .b1{font-family:'Niconne',cursive;font-size:1.8rem;color:var(--pink-dark);line-height:1;}
+  .about-badge .b2{font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cream);line-height:1.3;}
+
+  /* MENU */
+  .products{background:var(--black);}
+  .products-header{text-align:center;margin-bottom:4rem;}
+  .products-header .section-label{justify-content:center;}
+  .products-header .section-label::before{content:'';display:block;width:30px;height:1px;background:var(--pink-dark);}
+  .products-header .section-label::after{display:none;}
+
+  .menu-tabs{display:flex;justify-content:center;gap:.8rem;margin-bottom:3rem;flex-wrap:wrap;}
+  .tab-btn{background:transparent;border:1.5px solid rgba(234,85,142,.3);color:rgba(255,245,247,.6);padding:.5rem 1.4rem;border-radius:30px;font-family:'Raleway',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .25s;}
+  .tab-btn:hover,.tab-btn.active{background:var(--pink-dark);border-color:var(--pink-dark);color:white;}
+
+  .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+  .product-card{background:rgba(255,245,247,.04);border:1px solid rgba(234,85,142,.15);border-radius:20px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;display:none;}
+  .product-card.visible{display:block;}
+  .product-card:hover{transform:translateY(-8px);border-color:rgba(234,85,142,.5);box-shadow:0 20px 50px rgba(234,85,142,.15);}
+  .product-img{width:100%;aspect-ratio:1;overflow:hidden;position:relative;background:rgba(234,85,142,.08);display:flex;align-items:center;justify-content:center;}
+  .product-img img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .4s;}
+  .product-card:hover .product-img img{transform:scale(1.06);}
+  .product-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(10,10,10,.4));}
+  .product-badge-tag{position:absolute;top:1rem;right:1rem;background:var(--pink-dark);color:white;font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .7rem;border-radius:20px;z-index:2;}
+  .product-info{padding:1.5rem;}
+  .product-info h3{font-family:'Niconne',cursive;font-size:1.7rem;color:var(--white);margin-bottom:.4rem;}
+  .product-info p{font-size:.8rem;line-height:1.65;color:rgba(255,245,247,.55);margin-bottom:1rem;}
+  .product-footer{display:flex;align-items:center;justify-content:space-between;}
+  .price{font-family:'Niconne',cursive;font-size:1.4rem;color:var(--pink-dark);}
+  .price small{font-size:.9rem;opacity:.7;}
+  .add-btn{background:rgba(234,85,142,.15);color:var(--pink-dark);border:1px solid rgba(234,85,142,.3);padding:.45rem 1.1rem;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s;text-decoration:none;}
+  .add-btn:hover{background:var(--pink-dark);color:white;}
+
+  /* TRIFECTA FEATURE */
+  .trifecta-feature{background:linear-gradient(135deg,#0a0a0a 0%,#1a0a10 100%);border-top:1px solid rgba(234,85,142,.15);border-bottom:1px solid rgba(234,85,142,.15);padding:6rem 2rem;}
+  .trifecta-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+  .trifecta-img{border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(234,85,142,.2);}
+  .trifecta-img img{width:100%;display:block;}
+  .trifecta-tag{display:inline-block;background:rgba(234,85,142,.15);border:1px solid rgba(234,85,142,.3);color:var(--pink-light);font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px;margin-bottom:1.5rem;}
+
+  /* FEATURED */
+  .featured{background:linear-gradient(135deg,var(--pink-dark) 0%,#c2335e 100%);position:relative;overflow:hidden;padding:6rem 2rem;}
+  .featured::before{content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;background:rgba(255,255,255,.06);border-radius:50%;}
+  .featured-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;position:relative;z-index:2;}
+  .featured-tag{display:inline-block;background:rgba(255,255,255,.2);color:white;font-size:.65rem;font-weight:800;letter-spacing:.25em;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px;margin-bottom:1.2rem;}
+  .featured h2{font-size:clamp(2.5rem,5vw,4.5rem);color:var(--white);margin-bottom:1rem;}
+  .featured p{font-size:1rem;line-height:1.8;color:rgba(255,255,255,.85);margin-bottom:2rem;}
+  .featured-visual{aspect-ratio:1;background:rgba(255,255,255,.12);border-radius:50%;overflow:hidden;backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.2);animation:float 4s ease-in-out infinite;}
+  .featured-visual img{width:100%;height:100%;object-fit:cover;}
+
+  /* FIND US */
+  .findus{background:#111111;}
+  .findus-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+  .event-list{margin-top:2rem;display:flex;flex-direction:column;gap:1rem;}
+  .event-item{display:flex;align-items:center;gap:1.5rem;padding:1.2rem 1.5rem;background:rgba(234,85,142,.07);border:1px solid rgba(234,85,142,.15);border-radius:14px;transition:border-color .25s,background .25s;}
+  .event-item:hover{border-color:rgba(234,85,142,.4);background:rgba(234,85,142,.12);}
+  .event-date-box{min-width:52px;height:52px;background:var(--pink-dark);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
+  .event-date-box .month{font-size:.55rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.7);}
+  .event-date-box .day{font-family:'Niconne',cursive;font-size:1.6rem;color:white;line-height:1;}
+  .event-details h4{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.2rem;}
+  .event-details p{font-size:.75rem;color:rgba(255,245,247,.5);}
+  .event-status{margin-left:auto;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .7rem;border-radius:20px;white-space:nowrap;}
+  .status-live{background:rgba(72,199,142,.15);color:#48C78E;border:1px solid rgba(72,199,142,.3);}
+  .status-limited{background:rgba(234,85,142,.15);color:var(--pink-light);border:1px solid rgba(234,85,142,.3);}
+  .findus-right p{font-size:1rem;line-height:1.8;color:rgba(255,245,247,.65);margin-bottom:2rem;}
+  .doordash-box{background:rgba(255,245,247,.05);border:1px solid rgba(234,85,142,.2);border-radius:18px;padding:2rem;}
+  .doordash-box h4{font-family:'Niconne',cursive;font-size:1.8rem;color:var(--white);margin-bottom:.5rem;}
+  .doordash-box p{font-size:.82rem;color:rgba(255,245,247,.5);margin-bottom:1.5rem;}
+
+  /* ORDERS */
+  .orders{background:var(--cream);color:var(--black);}
+  .orders h2{color:var(--black);}
+  .orders-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .orders-left p{font-size:1.05rem;line-height:1.8;color:rgba(10,10,10,.72);margin-bottom:1.5rem;}
+  .order-types{display:flex;flex-direction:column;gap:.8rem;margin-top:2rem;}
+  .order-type{display:flex;align-items:center;gap:1rem;font-size:.85rem;font-weight:600;color:var(--black);}
+  .order-type::before{content:'';width:8px;height:8px;background:var(--pink-dark);border-radius:50%;flex-shrink:0;}
+  .form-card{background:var(--black);border-radius:24px;padding:2.5rem;border:1px solid rgba(234,85,142,.2);}
+  .form-card h3{font-family:'Niconne',cursive;font-size:2rem;color:var(--white);margin-bottom:1.5rem;}
+  .form-group{margin-bottom:1.2rem;}
+  .form-group label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,245,247,.5);margin-bottom:.5rem;}
+  .form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,245,247,.06);border:1px solid rgba(234,85,142,.2);border-radius:10px;padding:.85rem 1rem;color:var(--white);font-family:'Raleway',sans-serif;font-size:.9rem;outline:none;transition:border-color .25s;}
+  .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,245,247,.2);}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--pink-dark);}
+  .form-group select option{background:var(--black);}
+  .form-group textarea{width:100%;background:rgba(255,245,247,.06);border:1px solid rgba(234,85,142,.2);border-radius:10px;padding:.85rem 1rem;color:var(--white);font-family:'Raleway',sans-serif;font-size:.9rem;outline:none;transition:border-color .25s;height:100px;resize:none;}
+  .form-group textarea::placeholder{color:rgba(255,245,247,.2);}
+  .form-group textarea:focus{border-color:var(--pink-dark);}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+  /* REVIEWS */
+  .proof{background:var(--black);text-align:center;}
+  .proof-header{margin-bottom:4rem;}
+  .proof-header .section-label{justify-content:center;}
+  .proof-header .section-label::before{content:'';display:block;width:30px;height:1px;background:var(--pink-dark);}
+  .proof-header .section-label::after{display:none;}
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+  .review-card{background:rgba(255,245,247,.04);border:1px solid rgba(234,85,142,.12);border-radius:20px;padding:2rem;text-align:left;transition:border-color .3s,transform .3s;}
+  .review-card:hover{border-color:rgba(234,85,142,.35);transform:translateY(-5px);}
+  .stars{color:var(--pink-dark);font-size:1rem;letter-spacing:2px;margin-bottom:1rem;}
+  .review-text{font-size:.92rem;line-height:1.75;color:rgba(255,245,247,.75);margin-bottom:1.5rem;font-style:italic;}
+  .reviewer{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pink-dark);}
+  .proof-scarcity{margin-top:4rem;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;}
+  .scarcity-item .s-num{font-family:'Niconne',cursive;font-size:3.5rem;color:var(--pink-dark);line-height:1;}
+  .scarcity-item .s-label{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,245,247,.4);margin-top:.3rem;}
+
+  /* FOOTER */
+  footer{background:#050505;padding:4rem 2rem 2rem;border-top:1px solid rgba(234,85,142,.15);}
+  .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,245,247,.07);margin-bottom:2rem;}
+  .footer-brand .logo{font-family:'Niconne',cursive;font-size:2.2rem;color:var(--pink-dark);display:block;margin-bottom:1rem;}
+  .footer-brand p{font-size:.85rem;line-height:1.75;color:rgba(255,245,247,.45);}
+  .footer-brand .phone{color:var(--pink-dark);font-weight:700;font-size:.9rem;display:block;margin-top:.8rem;text-decoration:none;}
+  .footer-col h5{font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--pink-dark);margin-bottom:1.2rem;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:.6rem;}
+  .footer-col ul li a{font-size:.82rem;color:rgba(255,245,247,.5);text-decoration:none;transition:color .25s;}
+  .footer-col ul li a:hover{color:var(--pink-dark);}
+  .social-icons{display:flex;gap:.8rem;margin-top:1.5rem;}
+  .social-icon{width:38px;height:38px;background:rgba(234,85,142,.1);border:1px solid rgba(234,85,142,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--pink-dark);text-decoration:none;transition:background .25s;}
+  .social-icon:hover{background:var(--pink-dark);color:white;}
+  .footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:.72rem;color:rgba(255,245,247,.25);}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:.7}}
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem;} .nav-links{display:none;} h1{font-size:4.5rem;}
+    .about-inner,.featured-inner,.trifecta-inner,.findus-grid,.orders-inner{grid-template-columns:1fr;gap:3rem;}
+    .about-visual{display:none;} .products-grid{grid-template-columns:1fr 1fr;} .reviews-grid{grid-template-columns:1fr;} .footer-inner{grid-template-columns:1fr 1fr;} section{padding:5rem 1.5rem;}
+  }
+  @media(max-width:480px){.products-grid{grid-template-columns:1fr;}.footer-inner{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Cupcake Evolution</a>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#findus">Find Us</a></li>
+    <li><a href="#orders">Custom Orders</a></li>
+    <li><a href="opt-in.html">SMS Opt-In</a></li>
+    <li><a href="#order-options" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Houston's Premier Dessert Experience</div>
+    <h1>Not Your<span>Average</span>Cupcake.</h1>
+    <p class="hero-sub"><strong>Bold flavors. Luxury feel.</strong><br>Made to elevate your taste buds — one unforgettable bite at a time.</p>
+    <div class="btn-row">
+      <a href="#order-options" class="btn-primary">Order Now</a>
+      <a href="#findus" class="btn-outline">Find Us This Weekend</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ORDER OPTIONS -->
+<section id="order-options" style="background:#111111;padding:4rem 2rem;border-bottom:1px solid rgba(234,85,142,0.15);">
+  <div class="container" style="text-align:center;">
+    <div class="section-label" style="justify-content:center;">
+      <span style="display:block;width:30px;height:1px;background:var(--pink-dark);"></span>
+      How Would You Like to Order?
+    </div>
+    <h2 style="margin-bottom:.5rem;">Choose Your <span class="accent">Order Method</span></h2>
+    <p style="color:rgba(255,245,247,.55);font-size:.95rem;margin-bottom:3rem;">Order directly from us or through a delivery platform.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto;">
+
+      <div style="background:rgba(234,85,142,.07);border:1px solid rgba(234,85,142,.25);border-radius:20px;padding:2rem;transition:transform .3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">🧁</div>
+        <h3 style="font-family:'Niconne',cursive;font-size:1.8rem;color:var(--white);margin-bottom:.5rem;">Order Direct</h3>
+        <p style="font-size:.82rem;color:rgba(255,245,247,.55);margin-bottom:1.5rem;line-height:1.6;">Order straight from us. No extra fees. Pick up or arrange delivery directly.</p>
+        <a href="https://ecommerce.hostinger.com/AR03nJNyVeu1EzGG" target="_blank" class="btn-primary" style="display:block;text-align:center;">Order Direct →</a>
+      </div>
+
+      <div style="background:rgba(255,245,247,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem;">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">🛵</div>
+        <h3 style="font-family:'Niconne',cursive;font-size:1.8rem;color:var(--white);margin-bottom:.5rem;">DoorDash</h3>
+        <p style="font-size:.82rem;color:rgba(255,245,247,.55);margin-bottom:1.5rem;line-height:1.6;">Fast delivery to your door through DoorDash.</p>
+        <a href="https://www.doordash.com" target="_blank" class="btn-outline" style="display:block;text-align:center;">Order on DoorDash</a>
+      </div>
+
+      <div style="background:rgba(255,245,247,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem;">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">🍽️</div>
+        <h3 style="font-family:'Niconne',cursive;font-size:1.8rem;color:var(--white);margin-bottom:.5rem;">GrubHub</h3>
+        <p style="font-size:.82rem;color:rgba(255,245,247,.55);margin-bottom:1.5rem;line-height:1.6;">Fast delivery to your door through GrubHub.</p>
+        <a href="https://www.grubhub.com" target="_blank" class="btn-outline" style="display:block;text-align:center;">Order on GrubHub</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Bold Flavors</span><span class="dot">✦</span><span>Luxury Feel</span><span class="dot">✦</span><span>Elevate Your Taste Buds</span><span class="dot">✦</span><span>Limited. Fresh. Worth It.</span><span class="dot">✦</span><span>We Sell Out for a Reason</span><span class="dot">✦</span><span>Not Basic. Never Generic.</span><span class="dot">✦</span><span>Crafted for Flavor Lovers</span><span class="dot">✦</span><span>Houston's Finest Cupcakes</span><span class="dot">✦</span>
+    <span>Bold Flavors</span><span class="dot">✦</span><span>Luxury Feel</span><span class="dot">✦</span><span>Elevate Your Taste Buds</span><span class="dot">✦</span><span>Limited. Fresh. Worth It.</span><span class="dot">✦</span><span>We Sell Out for a Reason</span><span class="dot">✦</span><span>Not Basic. Never Generic.</span><span class="dot">✦</span><span>Crafted for Flavor Lovers</span><span class="dot">✦</span><span>Houston's Finest Cupcakes</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-text">
+        <div class="section-label">Our Story</div>
+        <h2>We Didn't Come to<br><span class="accent">Play It Safe.</span></h2>
+        <p>Cupcake Evolution was created to <strong>redefine what a cupcake should be.</strong> We focus on bold flavors, premium presentation, and unforgettable taste experiences that keep people coming back for more.</p>
+        <p>This isn't just dessert — this is an experience. One bite and you'll understand why we sell out every single weekend at markets across Houston and Galveston.</p>
+        <p>We don't do basic flavors. We don't do low-effort. Every cupcake is <strong>crafted to make an impression</strong> — because you deserve more than ordinary.</p>
+        <div class="about-stats">
+          <div class="stat-box"><div class="num">100%</div><div class="label">Gourmet Recipes</div></div>
+          <div class="stat-box"><div class="num">Sold Out</div><div class="label">Every Weekend</div></div>
+          <div class="stat-box"><div class="num">HTX</div><div class="label">Houston Proud</div></div>
+          <div class="stat-box"><div class="num">✦ New</div><div class="label">Flavor Each Weekend</div></div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <img class="about-visual-img" src="images/img-00.jpg" alt="Cupcake Evolution" />
+        <div class="about-badge"><div class="b1">HTX</div><div class="b2">Houston<br>Made</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="products" id="menu">
+  <div class="container">
+    <div class="products-header">
+      <div class="section-label">The Menu</div>
+      <h2>Flavors Built to <span class="accent">Impress</span></h2>
+      <p style="color:rgba(255,245,247,.55);font-size:1rem;margin-top:.5rem;max-width:560px;margin-left:auto;margin-right:auto;">Every cupcake available in Standard ($5) or Jumbo ($10). Made fresh in limited batches — when they're gone, they're gone.</p>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="filterMenu(this,'all')">All Flavors</button>
+      <button class="tab-btn" onclick="filterMenu(this,'classic')">Classics</button>
+      <button class="tab-btn" onclick="filterMenu(this,'fruity')">Fruity</button>
+      <button class="tab-btn" onclick="filterMenu(this,'indulgent')">Indulgent</button>
+      <button class="tab-btn" onclick="filterMenu(this,'bold')">Bold & Unique</button>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card visible" data-cat="classic fruity">
+        <div class="product-img"><img src="images/img-01.jpg" alt="Strawberry Shortcake Supreme"><span class="product-badge-tag">Fan Fave</span></div>
+        <div class="product-info"><h3>Strawberry Shortcake Supreme</h3><p>Light strawberry cake with fresh berries, cream cheese whipped frosting, strawberry crumbles, and a fresh strawberry garnish.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="classic">
+        <div class="product-img"><img src="images/img-02.jpg" alt="Banana Bliss"><span class="product-badge-tag">Southern Classic</span></div>
+        <div class="product-info"><h3>Banana Bliss</h3><p>Moist banana cake with light banana whipped frosting, crowned with a vanilla wafer and crushed wafer dusting for the perfect crunch.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="classic">
+        <div class="product-img"><img src="images/img-03.jpg" alt="Banana Foster Bliss"></div>
+        <div class="product-info"><h3>Banana Foster Bliss</h3><p>Golden vanilla cake with rich banana foster notes, topped with silky cream frosting dusted in gold — warm, buttery, and indulgent in every bite.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="classic">
+        <div class="product-img"><img src="images/img-04.jpg" alt="Velvet Royale"></div>
+        <div class="product-info"><h3>Velvet Royale</h3><p>Rich cocoa-infused red velvet cake with cloud-like cream cheese whipped frosting and mini chocolate chips for an elevated classic twist.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="fruity">
+        <div class="product-img"><img src="images/img-05.jpg" alt="Lemon Luxe"></div>
+        <div class="product-info"><h3>Lemon Luxe</h3><p>Light lemon-infused cake topped with silky lemon whipped icing — a bright, sun-kissed sensation guaranteed to awaken your taste buds.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="classic">
+        <div class="product-img"><img src="images/img-06.jpg" alt="Almond Luxe"></div>
+        <div class="product-info"><h3>Almond Luxe</h3><p>Moist almond cake topped with silky vanilla bean buttercream and finished with a golden honey drizzle. Smooth, elegant, and perfectly balanced.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="indulgent">
+        <div class="product-img"><img src="images/img-07.jpg" alt="Cookies & Cream Crush"></div>
+        <div class="product-info"><h3>Cookies & Cream Crush</h3><p>Vanilla cake packed with crushed sandwich cookies, crowned with cookies and cream whipped frosting and a whole cookie on top.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="fruity">
+        <div class="product-img"><img src="images/img-08.jpg" alt="Strawberry Lemonade Bliss"></div>
+        <div class="product-info"><h3>Strawberry Lemonade Bliss</h3><p>Sweet strawberry cake with a tart lemon curd center, silky strawberry-lemon frosting, sugared strawberries, and a twist of lemon zest.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="indulgent">
+        <div class="product-img"><img src="images/img-09.jpg" alt="Snickers Sensation"><span class="product-badge-tag">Must Try</span></div>
+        <div class="product-info"><h3>Snickers Sensation</h3><p>Chocolate cake with gooey caramel and peanut filling, Snickers-flavored frosting, caramel drizzle, and chopped Snickers pieces on top.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="fruity">
+        <div class="product-img"><img src="images/img-10.jpg" alt="Pineapple Paradise"></div>
+        <div class="product-info"><h3>Pineapple Paradise</h3><p>Caramelized pineapple crowns a golden vanilla cake baked upside down, topped with airy pineapple frosting, caramel drizzle, and a cherry.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="indulgent">
+        <div class="product-img"><img src="images/img-11.jpg" alt="German Indulgence"></div>
+        <div class="product-info"><h3>German Indulgence</h3><p>Deep German chocolate cake swirled with luscious coconut-pecan frosting, finished with toasted coconut flakes and chopped pecans.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="indulgent">
+        <div class="product-img"><img src="images/img-12.jpg" alt="Peanut Butter Cup Royale"></div>
+        <div class="product-info"><h3>Peanut Butter Cup Royale</h3><p>Rich chocolate cake loaded with peanut butter chips, creamy peanut butter buttercream, chocolate drizzle, and peanut butter crunch. Luxury sweet-and-salty.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="fruity">
+        <div class="product-img"><img src="images/img-13.jpg" alt="Blueberry Lemonade Burst"></div>
+        <div class="product-info"><h3>Blueberry Lemonade Burst</h3><p>Fluffy blueberry cake bursting with juicy blueberries, topped with refreshing lemon whipped frosting, fresh blueberries, and a dusting of lemon zest.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="bold">
+        <div class="product-img"><img src="images/img-14.jpg" alt="Emerald Berry Luxe"><span class="product-badge-tag">Luxe</span></div>
+        <div class="product-info"><h3>Emerald Berry Luxe</h3><p>Rich pistachio cake layered with silky raspberry buttercream, finished with roasted pistachios. Sweet, nutty, and perfectly balanced with berry brightness.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="bold">
+        <div class="product-img"><img src="images/img-15.jpg" alt="Lotus Luxe"><span class="product-badge-tag">Signature</span></div>
+        <div class="product-info"><h3>Lotus Luxe</h3><p>Velvety cookie batter cake swirled with creamy Biscoff frosting, drizzled with caramel, and crowned with a signature Lotus cookie. Decadent. Dreamy. Divine.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="bold">
+        <div class="product-img"><img src="images/img-16.jpg" alt="Praline Pecan"></div>
+        <div class="product-info"><h3>Praline Pecan</h3><p>A Southern-inspired masterpiece — rich buttery cake loaded with caramelized pecan praline, finished with a toasted coconut crunch that melts in every bite.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="bold">
+        <div class="product-img"><img src="images/img-17.jpg" alt="Carnival Confetti"><span class="product-badge-tag">Party Ready</span></div>
+        <div class="product-info"><h3>Carnival Confetti</h3><p>A festive swirl of bold yellow, green, and purple buttercream bursting with celebration energy — the life of the party in every single bite.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="bold">
+        <div class="product-img"><img src="images/img-18.jpg" alt="Voodoo Velvet"><span class="product-badge-tag">Bold</span></div>
+        <div class="product-info"><h3>Voodoo Velvet</h3><p>Dark chocolate cake draped in a striking purple buttercream with gold leaf accents — mysterious, bold, and unforgettable from first glance to last bite.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="bold">
+        <div class="product-img"><img src="images/img-19.jpg" alt="The Evolution"><span class="product-badge-tag">Our Best</span></div>
+        <div class="product-info"><h3>The Evolution</h3><p>Our most ambitious creation — a towering churro-style dessert loaded with whipped cream, caramel, and chocolate drizzle. This is what we evolved for.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="bold">
+        <div class="product-img"><img src="images/img-20.jpg" alt="Mango Tajín Temptation" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;\'>🥭</div>'"/></div>
+        <div class="product-info"><h3>Mango Tajín Temptation</h3><p>Tropical mango cupcake with silky mango buttercream, finished with a bold Tajín kick — sweet citrus heat and tangy spice in every bite.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="bold">
+        <div class="product-img" style="background:linear-gradient(135deg,rgba(180,80,20,.3),rgba(234,85,142,.1));"><img src="images/img-21.jpg" alt="Maple Bacon Heatwave" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="product-info"><h3>Maple Bacon Heatwave</h3><p>Rich maple-spiced cake with smooth maple buttercream, smoky candied bacon crunch, and a subtle jalapeño heat that lingers just enough.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+      <div class="product-card visible" data-cat="bold">
+        <div class="product-img" style="background:linear-gradient(135deg,rgba(20,150,50,.3),rgba(234,85,142,.1));"><img src="images/img-22.jpg" alt="Cucumber Serrano Splash" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="product-info"><h3>Cucumber Serrano Splash</h3><p>Cool cucumber-lime cake swirled with refreshing buttercream, elevated with a smooth serrano finish — crisp, sweet heat unlike anything else.</p><div class="product-footer"><span class="price">$5 <small>/ $10 Jumbo</small></span><a href="#order-options" class="add-btn">Order Now</a></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRIFECTA -->
+<section class="trifecta-feature">
+  <div class="trifecta-inner">
+    <div class="trifecta-img"><img src="images/img-23.jpg" alt="Trifecta Luxe — 3 Desserts. 1 Bite."></div>
+    <div class="trifecta-text">
+      <div class="section-label">Our Signature</div>
+      <span class="trifecta-tag">✦ The Showstopper</span>
+      <h2>Trifecta <span class="accent">Luxe</span></h2>
+      <p style="font-family:'Niconne',cursive;font-size:1.6rem;color:var(--pink-light);margin-bottom:1rem;">3 Desserts. 1 Bite.</p>
+      <p>This isn't just a cupcake — it's an experience. The Trifecta Luxe layers three bold, indulgent dessert elements into one premium creation that leaves people speechless.</p>
+      <p>One bite and you'll understand why this is our most talked-about item. Limited availability. Once it's gone — it's gone.</p>
+      <div class="btn-row" style="justify-content:flex-start;margin-top:1.5rem;">
+        <a href="https://www.doordash.com" target="_blank" class="btn-primary">Order the Trifecta</a>
+        <a href="#orders" class="btn-outline" style="border-color:rgba(234,85,142,.4);color:var(--pink-light);">Custom Order</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED FLAVOR -->
+<section class="featured">
+  <div class="featured-inner">
+    <div>
+      <span class="featured-tag">✦ This Weekend Only</span>
+      <h2>Featured Flavor<br>of the Weekend</h2>
+      <p>Every weekend we drop a bold, limited-edition flavor you won't find anywhere else. Follow us on Instagram to be the first to know — because once they're gone, they're gone.</p>
+      <div class="btn-row" style="justify-content:flex-start;">
+        <a href="https://www.instagram.com/cupcakeevolution.htx?utm_source=qr" target="_blank" class="btn-primary" style="background:rgba(255,255,255,.2);box-shadow:none;backdrop-filter:blur(10px);">Follow @cupcakeevolution.htx</a>
+        <a href="#orders" class="btn-outline" style="border-color:rgba(255,255,255,.4);color:white;">Pre-Order</a>
+      </div>
+    </div>
+    <div class="featured-visual"><img src="images/img-24.jpg" alt="Featured Flavor"></div>
+  </div>
+</section>
+
+<!-- FIND US -->
+<section class="findus" id="findus">
+  <div class="container">
+    <div class="findus-grid">
+      <div>
+        <div class="section-label">Where To Find Us</div>
+        <h2>We Pop Up.<br><span class="accent">You Show Up.</span></h2>
+        <div class="event-list">
+          <div class="event-item">
+            <div class="event-date-box"><span class="month">Jul</span><span class="day">29</span></div>
+            <div class="event-details"><h4>Christmas in July</h4><p>Fallbrook Church · Houston, TX</p></div>
+            <span class="event-status status-live">Confirmed</span>
+          </div>
+          <div class="event-item">
+            <div class="event-date-box"><span class="month">Jul</span><span class="day">31</span></div>
+            <div class="event-details"><h4>MarMo Plaza</h4><p>Galveston Island, TX · Jul 31 & Aug 1</p></div>
+            <span class="event-status status-live">Confirmed</span>
+          </div>
+          <div class="event-item">
+            <div class="event-date-box"><span class="month">Aug</span><span class="day">7</span></div>
+            <div class="event-details"><h4>MarMo Plaza — ArtWalk</h4><p>Galveston Island, TX · Aug 7 & 8</p></div>
+            <span class="event-status status-live">Confirmed</span>
+          </div>
+          <div class="event-item">
+            <div class="event-date-box"><span class="month">Aug</span><span class="day">14</span></div>
+            <div class="event-details"><h4>MarMo Plaza</h4><p>Galveston Island, TX · Aug 14 & 15</p></div>
+            <span class="event-status status-live">Confirmed</span>
+          </div>
+          <div class="event-item">
+            <div class="event-date-box"><span class="month">Aug</span><span class="day">21</span></div>
+            <div class="event-details"><h4>MarMo Plaza</h4><p>Galveston Island, TX · Aug 21 & 22</p></div>
+            <span class="event-status status-live">Confirmed</span>
+          </div>
+          <div class="event-item">
+            <div class="event-date-box"><span class="month">Aug</span><span class="day">28</span></div>
+            <div class="event-details"><h4>MarMo Plaza — Art In Motion</h4><p>Galveston Island, TX · Aug 28 & 29</p></div>
+            <span class="event-status status-limited">Limited Stock</span>
+          </div>
+        </div>
+        <p style="font-size:.78rem;color:rgba(255,245,247,.35);margin-top:1.2rem;">📍 Follow <strong style="color:var(--pink-dark);">@cupcakeevolution.htx</strong> on Instagram for real-time location drops.</p>
+      </div>
+      <div class="findus-right">
+        <div class="section-label">Order From Home</div>
+        <h2>Can't Make It<br><span class="accent">Out?</span></h2>
+        <p>No worries — we've got you covered. Order fresh on DoorDash or GrubHub and have them delivered right to your door. Same bold flavors. Same luxury experience. Zero excuses.</p>
+        <div class="doordash-box">
+          <h4>Order for Delivery</h4>
+          <p>Fast delivery · Fresh made · Worth every penny</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;"><a href="https://www.doordash.com" target="_blank" class="btn-primary" style="flex:1;text-align:center;">🛵 DoorDash</a><a href="https://www.grubhub.com" target="_blank" class="btn-primary" style="flex:1;text-align:center;background:linear-gradient(135deg,#f63440,#c8001e);">🍽️ GrubHub</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOM ORDERS -->
+<section class="orders" id="orders">
+  <div class="container">
+    <div class="orders-inner">
+      <div class="orders-left">
+        <div class="section-label" style="color:var(--pink-dark);">Custom Orders</div>
+        <h2>Your Event.<br><span class="accent">Our Cupcakes.</span></h2>
+        <p>Planning a celebration? Whether it's a birthday, wedding, corporate event, or you just want to treat your team — Cupcake Evolution delivers a premium experience every time.</p>
+        <p>Pre-orders are limited and fill up fast. Secure your sweet box before we sell out.</p>
+        <div class="order-types">
+          <div class="order-type">Birthday Parties & Celebrations</div>
+          <div class="order-type">Weddings & Bridal Showers</div>
+          <div class="order-type">Corporate & Office Orders</div>
+          <div class="order-type">Event Cupcake Boxes</div>
+          <div class="order-type">Custom Flavor Requests</div>
+        </div>
+        <p style="margin-top:2rem;font-size:.9rem;color:rgba(10,10,10,.6);">📞 Call or text: <strong style="color:var(--pink-dark);">833-422-3489</strong></p>
+        <p style="margin-top:.6rem;font-size:.9rem;color:rgba(10,10,10,.6);">📧 <a href="mailto:sales@ccehtx.com" style="color:var(--pink-dark);font-weight:700;">sales@ccehtx.com</a></p>
+        <p style="margin-top:.4rem;font-size:.9rem;color:rgba(10,10,10,.6);">📧 General: <a href="mailto:info@ccehtx.com" style="color:var(--pink-dark);font-weight:700;">info@ccehtx.com</a></p>
+      </div>
+      <div class="form-card">
+        <h3>Secure Your Sweet Box</h3>
+        <form action="https://formspree.io/f/xbdnpedd" method="POST">
+        <input type="hidden" name="_subject" value="New Cupcake Evolution Order Request!" />
+        <input type="hidden" name="_next" value="https://ccehtx.com" />
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" name="name" placeholder="Your name" required/></div>
+          <div class="form-group"><label>Phone / Email</label><input type="text" name="email_or_phone" placeholder="Contact info" required/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Event Date</label><input type="date" name="event_date"/></div>
+          <div class="form-group"><label>Order Type</label>
+            <select><option value="">Select type...</option><option>Birthday Party</option><option>Wedding / Bridal</option><option>Corporate Order</option><option>Event / Festival</option><option>Personal Treat Box</option></select>
+          </div>
+        </div>
+        <div class="form-group"><label>Quantity, Size & Flavor Notes</label><textarea name="order_details" placeholder="How many? Standard or Jumbo? Any flavor requests?" required></textarea></div>
+        <button type="submit" class="btn-primary" style="width:100%;text-align:center;">Submit My Order Request →</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="proof" id="reviews">
+  <div class="container">
+    <div class="proof-header">
+      <div class="section-label">Real People. Real Reactions.</div>
+      <h2>They Came. They Tasted.<br><span class="accent">They Came Back.</span></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"My new sweet sister! It was so awesome meeting you and Jeff! Those cupcakes are freaking AMAZING! Can't wait to see you again so I can stock up! This is just the beginning of our love story!"</p>
+        <span class="reviewer">— Emotional Support Cookies</span>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Unique flavors and cute presentation. Try the cucumber serrano cupcake — the 'odd' flavors are so surprisingly fantastic!"</p>
+        <span class="reviewer">— Ashley Schaper Ramirez</span>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"OMG the moistest, bestest cupcakes ever!!!"</p>
+        <span class="reviewer">— Handcrafted Island Treasures</span>
+      </div>
+    </div>
+    <div class="proof-scarcity">
+      <div class="scarcity-item"><div class="s-num">Sold Out</div><div class="s-label">Every Weekend</div></div>
+      <div class="scarcity-item"><div class="s-num">Limited</div><div class="s-label">Fresh Batches Only</div></div>
+      <div class="scarcity-item"><div class="s-num">1 Bite</div><div class="s-label">and You'll Understand</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOOMFEST SPONSOR -->
+<section style="background:linear-gradient(135deg,#0a0a0a 0%,#1a0a10 100%);padding:6rem 2rem;border-top:1px solid rgba(234,85,142,.15);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+      <div>
+        <div class="section-label">In The Community</div>
+        <h2>Official <span class="accent">BloomFest</span><br>2026 Sponsor</h2>
+        <p style="font-size:1rem;line-height:1.8;color:rgba(255,245,247,.65);margin-bottom:1.5rem;">Cupcake Evolution is proud to be an official sponsor of BloomFest 2026 — a life-changing experience for women ready to grow, connect, and pursue purpose on purpose.</p>
+        <p style="font-size:1rem;line-height:1.8;color:rgba(255,245,247,.65);margin-bottom:2rem;"><strong style="color:var(--pink-dark);">June 11–14, 2026 · Houston, TX</strong><br>Come find us at the event and elevate your taste buds!</p>
+        <div class="btn-row" style="justify-content:flex-start;">
+          <a href="https://bloomfestconference.com" target="_blank" class="btn-primary">Learn About BloomFest</a>
+        </div>
+      </div>
+      <div style="border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(234,85,142,.2);">
+        <img src="images/img-25.jpg" alt="Dr. Tacoya Jones - Official BloomFest 2026 Sponsor" style="width:100%;display:block;" >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo">Cupcake Evolution</span>
+      <p>Bold flavors. Luxury feel. Unforgettable taste experiences — built for people who don't do basic.</p>
+      <a href="tel:8334223489" class="phone">📞 833-422-3489</a>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/cupcakeevolution.htx?utm_source=qr" target="_blank" class="social-icon" title="Instagram">ig</a>
+        <a href="https://www.facebook.com/share/14eqJZpQHxA/?mibextid=wwXIfr" target="_blank" class="social-icon" title="Facebook">fb</a>
+        <a href="https://www.tiktok.com/@cce_htx" target="_blank" class="social-icon" title="TikTok">tt</a>
+        <a href="https://www.doordash.com" target="_blank" class="social-icon" title="DoorDash">dd</a>
+        <a href="https://www.grubhub.com" target="_blank" class="social-icon" title="GrubHub">gh</a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Menu</h5><ul><li><a href="#menu">Standard ($5)</a></li><li><a href="#menu">Jumbo ($10)</a></li><li><a href="#menu">Trifecta Luxe</a></li><li><a href="#menu">Bold & Unique</a></li></ul></div>
+    <div class="footer-col"><h5>Order</h5><ul><li><a href="https://www.doordash.com" target="_blank">DoorDash Delivery</a></li><li><a href="https://www.grubhub.com" target="_blank">GrubHub Delivery</a></li><li><a href="#orders">Custom Orders</a></li><li><a href="#orders">Event Boxes</a></li><li><a href="#findus">Pop-Up Locations</a></li></ul></div>
+    <div class="footer-col"><h5>Connect</h5><ul><li><a href="https://www.instagram.com/cupcakeevolution.htx?utm_source=qr" target="_blank">Instagram @cupcakeevolution.htx</a></li><li><a href="https://www.facebook.com/share/14eqJZpQHxA/?mibextid=wwXIfr" target="_blank">Facebook</a></li><li><a href="https://www.tiktok.com/@cce_htx" target="_blank">TikTok @cce_htx</a></li><li><a href="opt-in.html">SMS Opt-In</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="tel:8334223489">833-422-3489</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Cupcake Evolution HTX. All rights reserved.</span><span><a href="privacy-policy.html" style="color:rgba(255,245,247,0.25);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="opt-in.html" style="color:rgba(255,245,247,0.25);text-decoration:none;">SMS Opt-In</a> &nbsp;·&nbsp; Elevate Your Taste Buds ✦</span></div>
+</footer>
+
+<script>
+function filterMenu(btn, cat) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card => {
+    if (cat === 'all' || (card.getAttribute('data-cat') || '').includes(cat)) {
+      card.classList.add('visible');
+    } else {
+      card.classList.remove('visible');
+    }
+  });
+}
+</script>
+</body>
+</html>
+
