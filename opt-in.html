@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SMS Opt-In | Cupcake Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Niconne&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --pink-dark:#EA558E; --pink-light:#FF7A8C; --black:#0a0a0a; --cream:#FFF5F7; --white:#ffffff; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--black); color: var(--white); font-family: 'Raleway', sans-serif; }
 
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(234,85,142,0.2); }
+  .nav-logo { font-family: 'Niconne', cursive; font-size: 2rem; color: var(--pink-dark); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.78rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; transition: color .3s; }
+  .nav-links a:hover { color: var(--pink-dark); }
+  .nav-cta { background: var(--pink-dark) !important; color: var(--white) !important; padding: .6rem 1.4rem; border-radius: 30px; }
+
+  .page-hero { padding: 10rem 2rem 4rem; text-align: center; background: linear-gradient(135deg, #0a0a0a, #1a0a10); border-bottom: 1px solid rgba(234,85,142,0.15); }
+  .page-hero h1 { font-family: 'Niconne', cursive; font-size: clamp(3rem, 7vw, 6rem); color: var(--white); }
+  .page-hero h1 span { color: var(--pink-dark); }
+  .page-hero p { font-size: 1rem; color: rgba(255,245,247,0.6); margin-top: 0.8rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+
+  .content { max-width: 820px; margin: 0 auto; padding: 5rem 2rem; }
+
+  /* OPT-IN CARDS */
+  .optin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem; }
+  .optin-card { background: rgba(255,245,247,0.04); border: 1px solid rgba(234,85,142,0.2); border-radius: 20px; padding: 2.5rem; text-align: center; transition: border-color .3s, transform .3s; }
+  .optin-card:hover { border-color: rgba(234,85,142,0.5); transform: translateY(-5px); }
+  .optin-card .icon { font-size: 3rem; margin-bottom: 1rem; }
+  .optin-card h3 { font-family: 'Niconne', cursive; font-size: 2rem; color: var(--white); margin-bottom: 0.8rem; }
+  .optin-card .keyword { display: inline-block; background: var(--pink-dark); color: white; font-size: 1.1rem; font-weight: 800; letter-spacing: 0.15em; padding: 0.5rem 1.5rem; border-radius: 30px; margin: 0.8rem 0; font-family: 'Raleway', sans-serif; }
+  .optin-card p { font-size: 0.85rem; line-height: 1.7; color: rgba(255,245,247,0.6); margin-bottom: 0.5rem; }
+  .optin-card .phone-num { font-size: 1.1rem; font-weight: 800; color: var(--pink-dark); display: block; margin-top: 0.5rem; }
+
+  /* FORM SECTION */
+  .form-section { background: rgba(255,245,247,0.03); border: 1px solid rgba(234,85,142,0.15); border-radius: 24px; padding: 3rem; margin-bottom: 3rem; }
+  .form-section h2 { font-family: 'Niconne', cursive; font-size: 2.5rem; color: var(--white); margin-bottom: 0.5rem; }
+  .form-section .subtitle { font-size: 0.9rem; color: rgba(255,245,247,0.5); margin-bottom: 2rem; line-height: 1.6; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,245,247,0.5); margin-bottom: 0.5rem; }
+  .form-group input, .form-group select { width: 100%; background: rgba(255,245,247,0.06); border: 1px solid rgba(234,85,142,0.2); border-radius: 10px; padding: 0.85rem 1rem; color: var(--white); font-family: 'Raleway', sans-serif; font-size: 0.9rem; outline: none; transition: border-color .25s; }
+  .form-group input::placeholder { color: rgba(255,245,247,0.2); }
+  .form-group input:focus, .form-group select:focus { border-color: var(--pink-dark); }
+  .form-group select option { background: var(--black); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* CHECKBOXES */
+  .checkbox-group { margin: 1.5rem 0; }
+  .checkbox-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; padding: 1rem 1.2rem; background: rgba(234,85,142,0.05); border: 1px solid rgba(234,85,142,0.15); border-radius: 12px; cursor: pointer; transition: background .25s; }
+  .checkbox-item:hover { background: rgba(234,85,142,0.1); }
+  .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--pink-dark); flex-shrink: 0; margin-top: 2px; cursor: pointer; }
+  .checkbox-item label { font-size: 0.85rem; line-height: 1.6; color: rgba(255,245,247,0.8); cursor: pointer; }
+  .checkbox-item label strong { color: var(--white); }
+
+  .disclaimer { font-size: 0.75rem; line-height: 1.7; color: rgba(255,245,247,0.4); margin: 1.5rem 0; padding: 1.2rem; background: rgba(255,255,255,0.02); border-radius: 10px; border-left: 3px solid rgba(234,85,142,0.3); }
+  .disclaimer a { color: var(--pink-dark); }
+
+  .btn-primary { background: linear-gradient(135deg, var(--pink-dark), var(--pink-light)); color: var(--white); padding: 1rem 2.5rem; border-radius: 50px; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; transition: transform .25s, box-shadow .25s; box-shadow: 0 8px 30px rgba(234,85,142,.4); border: none; cursor: pointer; font-family: 'Raleway', sans-serif; width: 100%; }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(234,85,142,.55); }
+
+  /* POLICY SUMMARY */
+  .policy-summary { margin-top: 3rem; }
+  .policy-summary h2 { font-family: 'Niconne', cursive; font-size: 2.2rem; color: var(--pink-dark); margin-bottom: 1.5rem; }
+  .policy-item { margin-bottom: 1.5rem; }
+  .policy-item h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink-light); margin-bottom: 0.4rem; }
+  .policy-item p { font-size: 0.88rem; line-height: 1.75; color: rgba(255,245,247,0.65); }
+  .policy-item a { color: var(--pink-dark); }
+
+  .highlight-box { background: rgba(234,85,142,0.08); border: 1px solid rgba(234,85,142,0.25); border-radius: 14px; padding: 1.5rem 2rem; margin: 2rem 0; }
+  .highlight-box p { font-size: 0.9rem; line-height: 1.75; color: rgba(255,245,247,0.85); margin: 0; }
+  .highlight-box strong { color: var(--pink-dark); }
+
+  footer { background: #050505; padding: 3rem 2rem; border-top: 1px solid rgba(234,85,142,0.15); text-align: center; }
+  footer .logo { font-family: 'Niconne', cursive; font-size: 1.8rem; color: var(--pink-dark); display: block; margin-bottom: 0.8rem; }
+  footer p { font-size: 0.75rem; color: rgba(255,245,247,0.25); }
+  footer a { color: var(--pink-dark); text-decoration: none; margin: 0 0.5rem; font-size: 0.75rem; }
+
+  @media(max-width:768px) {
+    nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+    .optin-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Cupcake Evolution</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#menu">Menu</a></li>
+    <li><a href="index.html#findus">Find Us</a></li>
+    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+    <li><a href="index.html#orders" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <h1>SMS <span>Opt-In</span></h1>
+  <p>Stay in the loop on new flavor drops, pop-up locations, exclusive deals, and event updates — delivered straight to your phone.</p>
+</div>
+
+<div class="content">
+
+  <!-- TEXT TO OPT IN CARDS -->
+  <div class="optin-grid">
+    <div class="optin-card">
+      <div class="icon">📍</div>
+      <h3>Stay Informed</h3>
+      <p>Get pop-up locations, event updates, and order notifications. Text:</p>
+      <span class="keyword">CUPCAKE</span>
+      <p>to</p>
+      <a class="phone-num" href="tel:8334223489">(833) 422-3489</a>
+      <p style="margin-top:1rem;font-size:0.75rem;color:rgba(255,245,247,0.4);">Message frequency varies. Msg &amp; data rates may apply. Reply STOP to unsubscribe.</p>
+    </div>
+    <div class="optin-card">
+      <div class="icon">🎉</div>
+      <h3>Get Deals</h3>
+      <p>Receive exclusive promotions, new flavor announcements &amp; special offers. Text:</p>
+      <span class="keyword">EVOLVE</span>
+      <p>to</p>
+      <a class="phone-num" href="tel:8334223489">(833) 422-3489</a>
+      <p style="margin-top:1rem;font-size:0.75rem;color:rgba(255,245,247,0.4);">Message frequency varies. Msg &amp; data rates may apply. Reply STOP to unsubscribe.</p>
+    </div>
+  </div>
+
+  <!-- ONLINE OPT-IN FORM -->
+  <div class="form-section">
+    <h2>Sign Up Online</h2>
+    <p class="subtitle">Fill out the form below to opt in to text message communications from Cupcake Evolution. By submitting, you agree to receive SMS messages from <strong style="color:var(--pink-dark);">(833) 422-3489</strong>.</p>
+
+    <div class="form-row">
+      <div class="form-group"><label>First Name *</label><input type="text" placeholder="Your first name" /></div>
+      <div class="form-group"><label>Last Name *</label><input type="text" placeholder="Your last name" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Email Address *</label><input type="email" placeholder="your@email.com" /></div>
+      <div class="form-group"><label>Mobile Phone Number *</label><input type="tel" placeholder="(555) 000-0000" /></div>
+    </div>
+
+    <div class="checkbox-group">
+      <p style="font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,245,247,0.5);margin-bottom:1rem;">Select the messages you agree to receive:</p>
+
+      <div class="checkbox-item">
+        <input type="checkbox" id="promo" name="promo" />
+        <label for="promo">
+          <strong>I agree to receive promotional messages from Cupcake Evolution</strong> sent from (833) 422-3489. This includes new flavor announcements, special deals, discount codes, and texts promoting our products and services.
+        </label>
+      </div>
+
+      <div class="checkbox-item">
+        <input type="checkbox" id="info" name="info" />
+        <label for="info">
+          <strong>I agree to receive Account Notifications, Customer Care, and Delivery Notifications</strong> from Cupcake Evolution sent from (833) 422-3489. This includes order updates, pop-up location drops, and event announcements.
+        </label>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      Do you agree to receive text messages from <strong>Cupcake Evolution</strong> sent from <strong>(833) 422-3489</strong>? Message frequency varies and may include Account Notifications, Customer Care, Delivery Notifications, and Promotional messages. Message and data rates may apply. Reply <strong>STOP</strong> or <strong>CANCEL</strong> at any time to unsubscribe. For assistance, reply <strong>HELP</strong> or contact us at <a href="tel:8334223489">(833) 422-3489</a> or <a href="mailto:info@ccehtx.com">info@ccehtx.com</a>. See our <a href="privacy-policy.html">Privacy Policy</a> for details on how we handle your information.
+    </div>
+
+    <button class="btn-primary" onclick="alert('Thank you for opting in! You will receive a confirmation text shortly.')">
+      Submit & Opt In →
+    </button>
+  </div>
+
+  <!-- POLICY SUMMARY -->
+  <div class="policy-summary">
+    <h2>SMS Policy Summary</h2>
+
+    <div class="policy-item">
+      <h4>Data Collection</h4>
+      <p>We collect your name, email address, and mobile phone number when you agree to receive SMS. Information is collected via this website form.</p>
+    </div>
+    <div class="policy-item">
+      <h4>Data Usage</h4>
+      <p>We use your data solely to communicate via SMS about order updates, event locations, new flavor drops, promotional offers, and customer care.</p>
+    </div>
+    <div class="policy-item">
+      <h4>Data Security</h4>
+      <p>We protect your data with secure storage measures to prevent unauthorized access.</p>
+    </div>
+    <div class="policy-item">
+      <h4>Data Retention</h4>
+      <p>We retain your information as long as you are subscribed to our SMS service. You may request deletion at any time by contacting <a href="mailto:info@ccehtx.com">info@ccehtx.com</a>.</p>
+    </div>
+    <div class="policy-item">
+      <h4>How to Stop Messages</h4>
+      <p>Reply <strong style="color:var(--pink-dark);">STOP</strong> or <strong style="color:var(--pink-dark);">CANCEL</strong> at any time. You will receive one final confirmation text and be removed within 24 hours. Reply <strong style="color:var(--pink-dark);">HELP</strong> for assistance.</p>
+    </div>
+    <div class="policy-item">
+      <h4>Message &amp; Data Rates</h4>
+      <p>MESSAGE AND DATA RATES MAY APPLY. Your mobile carrier may charge fees for sending or receiving text messages. Messages are recurring and frequency varies.</p>
+    </div>
+
+    <div class="highlight-box">
+      <p><strong>Non-Sharing Clause:</strong> No mobile information will be shared or collected with third parties or affiliates for marketing or promotional purposes. All other categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
+    </div>
+
+    <div class="policy-item">
+      <h4>Contact</h4>
+      <p>
+        📞 <a href="tel:8334223489">(833) 422-3489</a><br>
+        📧 <a href="mailto:info@ccehtx.com">info@ccehtx.com</a><br>
+        📧 Sales: <a href="mailto:sales@ccehtx.com">sales@ccehtx.com</a><br>
+        🌐 <a href="https://www.ccehtx.com">www.ccehtx.com</a>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="logo">Cupcake Evolution</span>
+  <p>
+    <a href="index.html">Home</a> ·
+    <a href="privacy-policy.html">Privacy Policy</a> ·
+    <a href="opt-in.html">SMS Opt-In</a> ·
+    <a href="mailto:info@ccehtx.com">info@ccehtx.com</a>
+  </p>
+  <p style="margin-top:0.8rem;">© 2026 Cupcake Evolution HTX. All rights reserved. &nbsp;·&nbsp; Elevate Your Taste Buds ✦</p>
+</footer>
+
+</body>
+</html>
